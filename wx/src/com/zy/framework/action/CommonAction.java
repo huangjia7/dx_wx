@@ -21,8 +21,6 @@ import com.zy.framework.service.BaseService;
 @SuppressWarnings("serial")
 public class CommonAction {
 	private Ware ware;
-	private String te1;
-	private String age;
 
 	public void setWare(Ware ware) {
 		this.ware = ware;
