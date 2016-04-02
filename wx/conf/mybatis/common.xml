@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="common" >
+     <resultMap type="WareEntity" id="WareResultMap">  
+        <result property="result" column="state"/>  
+    </resultMap>  
+       
+    <!-- 查询状态，根据编号 -->  
+    <select id="getStateByNo" parameterType="WareEntity" resultMap="WareResultMap">  
+        <![CDATA[  
+            select top 1 state from order_state where delegateId=#{no} order by createdate desc
+        ]]>    
+    </select> 
+</mapper>

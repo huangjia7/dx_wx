@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+     >
+     <!-- 
+        default-autowire="byName"
+      -->
+    
+     <context:component-scan base-package="com.zy.framework" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>   
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+    
+     <!-- 配置Spring上下文的注解 -->  
+    <context:annotation-config /> 
+    
+    <!-- 引入dbconfig.properties属性文件 -->
+    <context:property-placeholder location="classpath:jdbc/jdbc.properties" />    
+<!-- 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:conf/jdbc/jdbc.properties</value>
+		</property>
+	</bean> -->
+    
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">   
+	    <property name="driverClassName" value="${jdbc.driverClassName}" />
+	    <property name="url" value="${jdbc.url}" />  
+	    <property name="username" value="${jdbc.username}" />  
+	    <property name="password" value="${jdbc.password}" />  
+	    <property name="filters" value="stat" />  
+	     <property name="maxActive" value="20" /> 
+	     <property name="initialSize" value="1" />  
+	     <property name="maxWait" value="60000" />  
+	     <property name="minIdle" value="1" /> 
+	     <property name="timeBetweenEvictionRunsMillis" value="60000" /> 
+	     <property name="minEvictableIdleTimeMillis" value="300000" />  
+	     <property name="validationQuery" value="SELECT 'x'" /> 
+	     <property name="testWhileIdle" value="true" /> 
+	     <property name="testOnBorrow" value="false" /> 
+	     <property name="testOnReturn" value="false" />  
+	     <!-- 
+	     <property name="poolPreparedStatements" value="true" /> 
+	     <property name="maxPoolPreparedStatementPerConnectionSize" value="50" /> 
+	      -->
+    </bean>  
+    
+    <!-- 定义全局的事务控制 -->
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	   <property name="dataSource" ref="dataSource"/>
+	</bean>
+    
+   <!-- 开启注解方式声明事务
+   <tx:annotation-driven/>
+    -->
+    <tx:annotation-driven transaction-manager="transactionManager" />  
+    <!-- 配置事务的传播特性 -->   
+    <!-- 
+    Spring中Propagation类的事务属性详解：
+PROPAGATION_REQUIRED：支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。 
+PROPAGATION_SUPPORTS：支持当前事务，如果当前没有事务，就以非事务方式执行。 
+PROPAGATION_MANDATORY：支持当前事务，如果当前没有事务，就抛出异常。 
+PROPAGATION_REQUIRES_NEW：新建事务，如果当前存在事务，把当前事务挂起。
+ PROPAGATION_NOT_SUPPORTED：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。 
+PROPAGATION_NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。 
+PROPAGATION_NESTED：支持当前事务，如果当前事务存在，则执行一个嵌套事务，如果当前没有事务，就新建一个事务。
+
+   @Transactional(propagation=Propagation.NOT_SUPPORTED)  
+@Transactional(propagation=Propagation.MANDATORY)  
+@Transactional(propagation=Propagation.NESTED)  
+@Transactional(propagation=Propagation.REQUIRED)  
+@Transactional(propagation=Propagation.REQUIRES_NEW)  
+@Transactional(propagation=Propagation.SUPPORTS)  
+
+1.Required：共享型
+若1处在一个事务中调用了2，则2直接和1在同一个事务中。若1没有任何事务，则系统会默认给2创建一个新事务。此策略适合大多数情况。
+2.RequiredNew：独立型
+若1在一个事务中调用了2，则系统先将1的事务挂起，不管、之后为2设置一个新事务，执行完毕后恢复1的事务。若1没有事务，则会为2新开一个事务。
+3.Mandatory：强制共享型
+若1处在一个事务中调用了2，则2直接和1在同一个事务中。若1没有任何事务，直接抛出异常——Transaction RequiredException。
+4.NotSupported：无助独立型
+若1在一个事务中调用了2，则系统先将1的事务挂起，不管、之后2不开启任何事务，执行完毕后恢复1的事务。若1没有事务，2也直接执行。
+5. Supported：啃老型
+若1处在一个事务中调用了2，则2直接和1在同一个事务中。若1没有任何事务，直接执行2。
+6.Never：捣乱型
+若1处在一个事务中调用了2，则抛出RemoteException。若1没有任何事务，直接执行2也不会为它开启任何事务。
+    
+     -->
+<tx:advice id="txAdvice" transaction-manager="transactionManager">   
+<tx:attributes>   
+<tx:method name="insert*" propagation="REQUIRED"/>   
+<tx:method name="delete*" propagation="REQUIRED"/>   
+<tx:method name="update*" propagation="REQUIRED"/>   
+<tx:method name="*" read-only="true"/>   
+</tx:attributes>   
+</tx:advice>  
+    
+     <!-- 定义SqlSessionFactory 
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+       <property name="dataSource" ref="dataSource"/>
+
+       <property name="mapperLocations" value="classpath*:com/jsdz/xml/*.xml"/>
+
+       <property name="typeAliasesPackage"  value="com.mybatis.model"/>
+        
+    </bean>
+    -->
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+      <property name="dataSource" ref="dataSource" /> 
+      <!-- 指定sqlMapConfig总配置文件，订制的environment在spring容器中不在生效-->
+      <property  name="configLocation"  value="classpath:mybatis/sqlmap-config.xml"/>
+      <!--指定实体类映射文件，可以指定同时指定某一包以及子包下面的所有配置文件，mapperLocations和configLocation有一个即可，当需要为实体类指定别名时，可指定configLocation属性，再在mybatis总配置文件中采用mapper引入实体类映射文件 -->
+      <!--  
+         <property  name="mapperLocations"  value="classpath*:com/xxt/ibatis/dbcp/**/*.xml"/>  
+       -->
+   </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" >
+       <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
+</beans>
