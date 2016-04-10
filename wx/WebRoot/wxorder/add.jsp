@@ -1,16 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ include file="/common/include.jsp" %>
 <html>
   <head>
-<meta content="yes" name="apple-mobile-web-app-capable">
+ <meta content="yes" name="apple-mobile-web-app-capable"/>
  <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,user-scalable=no;">
     <title>微信下单</title>
-	<link rel="stylesheet" href="../weui/style/weui.min.css"/>
-	<link rel="stylesheet" href="../weui/style/example.css"/>
+	<link rel="stylesheet" href="<%=basePath%>/weui/style/weui.min.css"/>
+	<link rel="stylesheet" href="<%=basePath%>/weui/style/example.css"/>
 	<script src="jquery/jquery.js"></script>
   </head>
   <body>     
-    <%@ include file="/common/include.jsp" %>    
     <div class="hd">
         <h1 class="page_title">微信下单</h1>
     </div>  
@@ -20,7 +20,7 @@
             <div id="no_div" class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入单号.." onfocus="removeWarn('no')"/>
+                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入姓名.." onfocus="removeWarn('no')"/>
                 </div>
                 <div id="no_div_warn" class="weui_cell_ft" style="display:none;">
                     <i class="weui_icon_warn"></i>
@@ -30,7 +30,7 @@
             <div id="no_div" class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">电话</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入单号.." onfocus="removeWarn('no')"/>
+                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入电话.." onfocus="removeWarn('no')"/>
                 </div>
                 <div id="no_div_warn" class="weui_cell_ft" style="display:none;">
                     <i class="weui_icon_warn"></i>
@@ -40,7 +40,7 @@
             <div id="no_div" class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">站点</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入单号.." onfocus="removeWarn('no')"/>
+                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入站点.." onfocus="removeWarn('no')"/>
                 </div>
                 <div id="no_div_warn" class="weui_cell_ft" style="display:none;">
                     <i class="weui_icon_warn"></i>
@@ -50,7 +50,7 @@
             <div id="no_div" class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">地址</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入单号.." onfocus="removeWarn('no')"/>
+                    <input class="weui_input" type="text" id="no" name="ware.no" placeholder="请您输入地址.." onfocus="removeWarn('no')"/>
                 </div>
                 <div id="no_div_warn" class="weui_cell_ft" style="display:none;">
                     <i class="weui_icon_warn"></i>
@@ -60,7 +60,7 @@
             <div id="no_div" class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">备注</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" placeholder="请输入评论" rows="3"></textarea>
+                    <textarea class="weui_textarea" placeholder="请您输入备注.." rows="3"></textarea>
                 </div>
             </div>                 
             </div>                                         

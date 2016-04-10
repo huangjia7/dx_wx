@@ -1,16 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ include file="/common/include.jsp" %>
 <html>
   <head>
 <meta content="yes" name="apple-mobile-web-app-capable">
  <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,user-scalable=no;">
     <title>委托单查询</title>
-	<link rel="stylesheet" href="weui/style/weui.min.css"/>
-	<link rel="stylesheet" href="weui/style/example.css"/>
+	<link rel="stylesheet" href="<%=basePath%>/weui/style/weui.min.css"/>
+	<link rel="stylesheet" href="<%=basePath%>/weui/style/example.css"/>
 	<script src="jquery/jquery.js"></script>
   </head>
   <body>
-    <%@ include file="/common/include.jsp" %>
     <div class="hd">
         <h1 class="page_title">委托单查询</h1>
     </div>  
@@ -39,7 +39,7 @@
 $("#query").click(function(){  
   var $no = $('#no').val();
   if($no ==''|| $no.length==0){
-        $("#no").val("单号不能为空");
+        //$("#no").val("单号不能为空");
         $("#no_div").addClass("weui_cell_warn");
         $("#no_div_warn").show();
         return;
