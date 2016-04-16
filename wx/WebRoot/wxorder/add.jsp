@@ -10,7 +10,7 @@
     <title>微信下单</title>
 	<link rel="stylesheet" href="<%=basePath%>/weui/style/weui.min.css"/>
 	<link rel="stylesheet" href="<%=basePath%>/weui/style/example.css"/>
-	<script src="<%=basePath%>/jquery/jquery.js"></script>
+	<script src="<%=basePath%>jquery/jquerymobile/js/jquery.min.js"></script>
   </head>
   <body>     
     <div class="hd">
@@ -44,7 +44,7 @@
                 <div class="weui_cell_bd weui_cell_primary">
 			            <div class="weui_cell_hd">
 			                <select class="weui_select" name="wxorder.siteid">
-								<c:forEach var='Sites' items='${list}'>
+								<c:forEach var='Sites' items='${sitelist}'>
 								     <option value='<c:out value="${Sites.id}"/>'><c:out value='${Sites.name}'/></option>
 								</c:forEach>                
 			                </select>

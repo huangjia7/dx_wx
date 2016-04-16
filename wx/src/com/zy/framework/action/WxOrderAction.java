@@ -20,19 +20,18 @@ import com.zy.framework.model.WxOrder;
 @SuppressWarnings("serial")
 public class WxOrderAction extends BaseAction{
 	private WxOrder wxorder;
-	private List<SysSites> list=null;
-
-/*	@Override
-	public String execute() throws Exception {
-		list = (List<SysSites>) this.getBaseService().getObjects("order.getWxSites", null);
-		return "success";
-	}*/
+	private List<SysSites> sitelist=null;
+	private List<WxOrder> orderlist=null;
 	
 	public String pre(){
-		list = (List<SysSites>) this.getBaseService().getObjects("order.getWxSites", null);
-		return "success";
+		sitelist = (List<SysSites>) this.getBaseService().getObjects("order.getWxSites", null);
+		return Action.SUCCESS;
 	}
 	
+	/**
+	 * 保存网络订单
+	 * @return
+	 */
 	public String save(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -50,24 +49,12 @@ public class WxOrderAction extends BaseAction{
 	}
 	
 	/**
-	 * 获取状态
+	 * 获取网络订单列表
 	 * 
 	 * @return 数据列表
 	 */
-	public String getOrderState() {
-/*		String result = "无此单号信息!";
-		try {
-			Ware rWare = (Ware) this.getBaseService().getObject("getStateByNo", ware);
-			Map<String, Object> map = new HashMap<String, Object>();
-
-			if (rWare != null && StringUtils.isNotBlank(rWare.getResult())) {
-				result = rWare.getResult();
-			}
-
-			map.put("state", result);
-		} catch (Exception ee) {
-			ee.printStackTrace();
-		}*/
+	public String list() {
+		orderlist = (List<WxOrder>) this.getBaseService().getObjects("order.getOrderList", null);
 		return Action.SUCCESS;
 	}
 
@@ -80,12 +67,19 @@ public class WxOrderAction extends BaseAction{
 		this.wxorder = wxorder;
 	}
 
-	public List<SysSites> getList() {
-		return list;
+	public List<SysSites> getSitelist() {
+		return sitelist;
 	}
 
-	public void setList(List<SysSites> list) {
-		this.list = list;
+	public void setSitelist(List<SysSites> sitelist) {
+		this.sitelist = sitelist;
 	}
 
+	public List<WxOrder> getOrderlist() {
+		return orderlist;
+	}
+
+	public void setOrderlist(List<WxOrder> orderlist) {
+		this.orderlist = orderlist;
+	}
 }

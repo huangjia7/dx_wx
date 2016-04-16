@@ -1,6 +1,7 @@
 package com.zy.framework.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class WxOrder implements Serializable {
 	/**
@@ -14,11 +15,15 @@ public class WxOrder implements Serializable {
 	
 	private String siteid;
 	
+	private String sitename;
+	
 	private String addr;
 	
 	private String note;
 	
 	private int state;
+	
+	private String createdate;
 
 	public String getName() {
 		return name;
@@ -66,5 +71,21 @@ public class WxOrder implements Serializable {
 
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public String getSitename() {
+		return sitename;
+	}
+
+	public void setSitename(String sitename) {
+		this.sitename = sitename;
+	}
+
+	public String getCreatedate() {
+		return createdate;
+	}
+
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
 	}
 }
