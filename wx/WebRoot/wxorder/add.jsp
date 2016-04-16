@@ -37,20 +37,18 @@
                 <div id="tel_div_warn" class="weui_cell_ft" style="display:none;">
                     <i class="weui_icon_warn"></i>
                 </div>                
-            </div>     
+            </div>                 
             
-            <div id="no_div" class="weui_cell">
-			    <div class="weui_cell_hd"><label class="weui_label">站点</label></div>
-                <div class="weui_cell_bd weui_cell_primary">
-			            <div class="weui_cell_hd">
-			                <select class="weui_select" name="wxorder.siteid">
-								<c:forEach var='Sites' items='${sitelist}'>
-								     <option value='<c:out value="${Sites.id}"/>'><c:out value='${Sites.name}'/></option>
-								</c:forEach>                
-			                </select>
-			            </div>
-                </div>			        
-            </div>     
+	        <div class="weui_cell weui_cell_select weui_select_after">
+	            <div class="weui_cell_hd">站点</div>
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <select class="weui_select" name="wxorder.siteid">
+						<c:forEach var='Sites' items='${sitelist}'>
+						     <option value='<c:out value="${Sites.id}"/>'><c:out value='${Sites.name}'/></option>
+						</c:forEach>                
+	                </select>
+	            </div>
+	        </div>                
             
             <div id="addr_div" class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">地址</label></div>
