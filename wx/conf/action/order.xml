@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+     <package name="/order" namespace="/order" extends="struts-default,json-default">        
+		<action name="pre" class="wxOrderAction" method="pre">	
+            <result>/wxorder/add.jsp</result>	    
+		</action> 	
+		
+		<action name="save" class="wxOrderAction" method="save">	
+            <result type="json">  
+                <param name="root">responseJson</param>  
+            </result> 		    
+		</action> 		
+	</package>
+</struts>

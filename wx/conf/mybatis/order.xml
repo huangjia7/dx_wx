@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="order" >
+    <!-- 查询状态，根据编号 -->  
+    <select id="getWxSites" resultType ="SysSites">  
+        <![CDATA[  
+            select * from SYS_SITES
+        ]]>    
+    </select> 
+    
+  <!-- 新增信息 -->
+   <insert id="WxOrder_insert" parameterType="WxOrder">
+	insert into WX_ORDER (name, tel, siteid, addr, note, state, createdate, modifydate)
+    values (#{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{siteid,jdbcType=VARCHAR}, 
+      #{addr,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, getdate(), getdate())
+   </insert>    
+</mapper>

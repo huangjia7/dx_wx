@@ -2,15 +2,12 @@ package com.zy.framework.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.Action;
 import com.zy.framework.model.Ware;
-import com.zy.framework.service.BaseService;
 /**
  * 参数设置
  * @author zouyi
@@ -19,7 +16,7 @@ import com.zy.framework.service.BaseService;
 @Scope("request")
 @Controller("CommonAction")
 @SuppressWarnings("serial")
-public class CommonAction {
+public class CommonAction extends BaseAction{
 	private Ware ware;
 
 	public void setWare(Ware ware) {
@@ -47,26 +44,5 @@ public class CommonAction {
 			ee.printStackTrace();
 		}
 		return Action.SUCCESS;
-	}
-
-	@Resource
-	private BaseService baseService = null; // 业务处理对象
-
-	public BaseService getBaseService() {
-		return baseService;
-	}
-
-	public void setBaseService(BaseService baseService) {
-		this.baseService = baseService;
-	}
-
-	public Map responseJson;
-
-	public Map getResponseJson() {
-		return responseJson;
-	}
-
-	public void setResponseJson(Map responseJson) {
-		this.responseJson = responseJson;
 	}
 }

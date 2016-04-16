@@ -16,11 +16,6 @@
             <result type="json">  
                 <param name="root">responseJson</param>  
             </result> 		    
-		</action> 		
-
-		<action name="wxod" class="com.zy.framework.action.WxOrderAction">
-            <result name="success">/wxorder/add.jsp
-            </result> 		    
-		</action> 	
+		</action> 			
 	</package>
 </struts>

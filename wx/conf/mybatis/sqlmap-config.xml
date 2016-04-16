@@ -21,11 +21,14 @@
        </plugins>  
       -->
     <typeAliases>  
-        <typeAlias alias="WareEntity" type="com.zy.framework.model.Ware"/>  
+        <typeAlias alias="WareEntity" type="com.zy.framework.model.Ware"/> 
+        <typeAlias alias="SysSites" type="com.zy.framework.model.SysSites"/> 
+        <typeAlias alias="WxOrder" type="com.zy.framework.model.WxOrder"/>
     </typeAliases>       
       
        <mappers>
            <!-- 系统设置 -->
            <mapper resource="mybatis/common.xml"/>
+           <mapper resource="mybatis/order.xml"/>
        </mappers>
  </configuration>

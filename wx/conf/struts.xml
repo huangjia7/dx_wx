@@ -45,5 +45,6 @@
     <constant name="struts.multipart.saveDir " value="d:/tmp" />
     <!--注册拦截器-->
     <!-- 系统管理  grq -->
-    <include file="\action\common.xml"/>  
+    <include file="\action\common.xml"/>
+    <include file="\action\order.xml"/>
 </struts>

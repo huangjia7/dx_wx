@@ -1,28 +1,54 @@
 package com.zy.framework.action;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.Action;
-import com.zy.framework.model.Ware;
+import com.zy.framework.exception.SqlException;
+import com.zy.framework.model.SysSites;
 import com.zy.framework.model.WxOrder;
-import com.zy.framework.service.BaseService;
 /**
  * 微信订单管理
  * @author zouyi
  *
  */
 @Scope("request")
-@Controller("WxOrderAction")
+@Controller("wxOrderAction")
 @SuppressWarnings("serial")
-public class WxOrderAction {
+public class WxOrderAction extends BaseAction{
 	private WxOrder wxorder;
+	private List<SysSites> list=null;
 
+/*	@Override
+	public String execute() throws Exception {
+		list = (List<SysSites>) this.getBaseService().getObjects("order.getWxSites", null);
+		return "success";
+	}*/
+	
+	public String pre(){
+		list = (List<SysSites>) this.getBaseService().getObjects("order.getWxSites", null);
+		return "success";
+	}
+	
+	public String save(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			wxorder.setState(0);
+			this.getBaseService().insertObject(wxorder);
+			
+			map.put("state", Action.SUCCESS);
+			this.setResponseJson(map);
+		} catch (SqlException e) {
+			map.put("state", Action.ERROR);
+			this.setResponseJson(map);
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
 	/**
 	 * 获取状态
 	 * 
@@ -45,16 +71,6 @@ public class WxOrderAction {
 		return Action.SUCCESS;
 	}
 
-	@Resource
-	private BaseService baseService = null; // 业务处理对象
-
-	public BaseService getBaseService() {
-		return baseService;
-	}
-
-	public void setBaseService(BaseService baseService) {
-		this.baseService = baseService;
-	}
 
 	public WxOrder getWxorder() {
 		return wxorder;
@@ -63,4 +79,13 @@ public class WxOrderAction {
 	public void setWxorder(WxOrder wxorder) {
 		this.wxorder = wxorder;
 	}
+
+	public List<SysSites> getList() {
+		return list;
+	}
+
+	public void setList(List<SysSites> list) {
+		this.list = list;
+	}
+
 }

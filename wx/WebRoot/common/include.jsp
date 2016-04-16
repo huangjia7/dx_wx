@@ -9,10 +9,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <script type="text/javascript">
 		function removeWarn(id){
-		     $("#"+id).val("");
+		     //$("#"+id).val("");
 		     $("#"+id+"_div").removeClass("weui_cell_warn");
-		     $("#"+id+"_divwarn").hide();
+		     $("#"+id+"_div_warn").hide();
 		}    
+		function addWarn(id){
+		     $("#"+id+"_div").addClass("weui_cell_warn");
+		     $("#"+id+"_div_warn").show();
+		}   		
     </script>
 </head>
 <body>
@@ -37,5 +41,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div> 
 
+	<div id="toast" style="display: none;">
+	    <div class="weui_mask_transparent"></div>
+	    <div class="weui_toast">
+	        <i class="weui_icon_toast"></i>
+	        <p class="weui_toast_content">已完成</p>
+	    </div>
+	</div>
 </body>
 </html>

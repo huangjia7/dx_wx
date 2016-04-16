@@ -12,7 +12,7 @@ public class WxOrder implements Serializable {
 	
 	private String tel;
 	
-	private int siteid;
+	private String siteid;
 	
 	private String addr;
 	
@@ -36,11 +36,11 @@ public class WxOrder implements Serializable {
 		this.tel = tel;
 	}
 
-	public int getSiteid() {
+	public String getSiteid() {
 		return siteid;
 	}
 
-	public void setSiteid(int siteid) {
+	public void setSiteid(String siteid) {
 		this.siteid = siteid;
 	}
 
