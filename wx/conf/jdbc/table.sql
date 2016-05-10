@@ -5,7 +5,7 @@ CREATE TABLE dbo.WX_ORDER (
        id int primary key identity(1,1),
        name varchar(20) not null,
        tel varchar(20) not null,
-       siteid varchar(1),
+       siteid varchar(8),
        addr varchar(200),
        note varchar(400),
        state int default 0,
